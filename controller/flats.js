@@ -3,18 +3,21 @@ const flats = express();
 const models = require('../models');
 const Sequelize = require('sequelize');
 
+//index
 flats.get('/', (req, res) => {
   models.Flat.findAll().then(tasks => {
     res.json(tasks);
   });
 });
 
+//show
 flats.get('/:id', (req, res) => {
   models.Flat.findById(req.params.id).then(flats => {
     res.json(flats);
   });
 });
 
+//create
 flats.post('/', (req, res) => {
   models.Flat.create({
     title: req.body.title,
@@ -29,6 +32,7 @@ flats.post('/', (req, res) => {
   });
 });
 
+//update
 flats.put('/:id', (req, res) => {
   models.Flat.update(
     req.body,
@@ -38,6 +42,7 @@ flats.put('/:id', (req, res) => {
   });
 });
 
+//delete
 flats.delete('/:id', (req, res) => {
   models.Flat.destroy({ where: { id: req.params.id } }).then(flats => {
     res.json(flats);
